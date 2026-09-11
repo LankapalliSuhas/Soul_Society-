@@ -1,0 +1,23 @@
+{
+  "rest": {
+    "GET /api/health": "health check",
+    "POST /api/events": "ingest event",
+    "GET /api/inventory": "inventory list",
+    "GET /api/queue": "queue list",
+    "GET /api/cart": "cart list",
+    "GET /api/alerts": "alerts list",
+    "GET /api/dashboard": "dashboard summary"
+  },
+  "websocket": {
+    "path": "/ws/live",
+    "events": [
+      "ENTRY",
+      "EXIT",
+      "INVENTORY_UPDATE",
+      "CART_UPDATE",
+      "QUEUE_UPDATE",
+      "ALERT",
+      "HEALTH"
+    ]
+  }
+}

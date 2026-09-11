@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CartItem",
+  "type": "object",
+  "required": ["cart_id", "current_weight_grams", "weight_change_grams", "estimated_item_count", "item_burden", "confidence"],
+  "properties": {
+    "cart_id": {"type": "string"},
+    "current_weight_grams": {"type": "number"},
+    "weight_change_grams": {"type": "number"},
+    "estimated_item_count": {"type": "integer"},
+    "item_burden": {"type": "string"},
+    "confidence": {"type": "number"}
+  }
+}

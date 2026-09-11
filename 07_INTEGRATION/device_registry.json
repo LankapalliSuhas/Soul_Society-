@@ -1,0 +1,28 @@
+{
+  "devices": [
+    {
+      "device_id": "esp32_cam_entry",
+      "type": "camera",
+      "mqtt_topic": "netra/entry",
+      "data_expected": ["ENTRY", "EXIT"]
+    },
+    {
+      "device_id": "esp32_cam_queue",
+      "type": "camera",
+      "mqtt_topic": "netra/queue",
+      "data_expected": ["QUEUE_UPDATE"]
+    },
+    {
+      "device_id": "esp32_sensor_node",
+      "type": "sensor",
+      "mqtt_topic": "netra/events/weight",
+      "data_expected": ["WEIGHT_CHANGE"]
+    },
+    {
+      "device_id": "cart_node",
+      "type": "sensor",
+      "mqtt_topic": "netra/cart",
+      "data_expected": ["CART_UPDATE"]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    working_dir: /app/04_BACKEND
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"

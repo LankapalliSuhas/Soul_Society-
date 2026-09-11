@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueueItem",
+  "type": "object",
+  "required": ["timestamp", "lane", "people_count", "item_burden", "estimated_wait_seconds", "service_rate_per_minute", "confidence", "status"],
+  "properties": {
+    "timestamp": {"type": "string"},
+    "lane": {"type": "string"},
+    "people_count": {"type": "integer"},
+    "item_burden": {"type": "string"},
+    "estimated_wait_seconds": {"type": "integer"},
+    "service_rate_per_minute": {"type": "number"},
+    "confidence": {"type": "number"},
+    "status": {"type": "string"}
+  }
+}

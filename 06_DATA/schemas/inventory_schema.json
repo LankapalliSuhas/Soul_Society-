@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InventoryItem",
+  "type": "object",
+  "required": ["sku", "shelf_id", "current_weight_grams", "estimated_quantity", "threshold", "status", "confidence"],
+  "properties": {
+    "sku": {"type": "string"},
+    "shelf_id": {"type": "string"},
+    "current_weight_grams": {"type": "number"},
+    "estimated_quantity": {"type": "integer"},
+    "threshold": {"type": "integer"},
+    "status": {"type": "string"},
+    "confidence": {"type": "number"}
+  }
+}

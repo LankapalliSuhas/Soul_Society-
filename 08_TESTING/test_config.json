@@ -1,0 +1,6 @@
+{
+  "backend_url": "http://localhost:8000",
+  "mqtt_broker": "localhost",
+  "mqtt_port": 1883,
+  "test_topics": ["netra/test/#"]
+}

@@ -1,0 +1,22 @@
+{
+  "app_name": "NETRA Backend",
+  "api_prefix": "/api",
+  "host": "0.0.0.0",
+  "port": 8000,
+  "mqtt": {
+    "broker": "localhost",
+    "port": 1883,
+    "client_id": "netra_backend",
+    "keepalive": 60,
+    "topics": ["netra/events/#"]
+  },
+  "database": {
+    "path": "99_RUNTIME/database/netra.db"
+  },
+  "websocket": {
+    "path": "/ws/live"
+  },
+  "logging": {
+    "level": "INFO"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "pipelines": {
+    "entry": {
+      "input": "netra/entry",
+      "output": "websocket"
+    },
+    "inventory": {
+      "input": "netra/events/weight",
+      "output": "inventory_schema.json"
+    },
+    "cart": {
+      "input": "netra/cart",
+      "output": "cart_schema.json"
+    },
+    "queue": {
+      "input": "netra/queue",
+      "output": "queue_schema.json"
+    }
+  }
+}
