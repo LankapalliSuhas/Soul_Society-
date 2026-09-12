@@ -1,46 +1,41 @@
-import { useApi } from "../hooks/useApi";
-import { getQueueLanes } from "../services/api";
-import LaneCard from "../components/LaneCard";
-import QueueETAChart from "../charts/QueueETAChart";
-import AlertBanner from "../components/AlertBanner";
+// 05_FRONTEND/src/pages/Queue.jsx
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { getQueueLanes } from '../services/api';
+import LaneCard from '../components/LaneCard';
+import QueueETAChart from '../charts/QueueETAChart';
 
 export default function Queue() {
-  const { data, loading, error, isEmpty } = useApi(getQueueLanes, { pollMs: 5000 });
-  const lanes = data || [];
+  const [lanes, setLanes] = useState([]);
+
+  useEffect(() => {
+    getQueueLanes().then(res => {
+      if (res.data) setLanes(res.data);
+    });
+  }, []);
 
   return (
-    <div>
-      <div className="flex justify-between items-start flex-wrap gap-2.5 mb-7">
-        <div>
-          <h1 className="text-[32px] font-semibold tracking-tight">Queue</h1>
-          <div className="text-sm text-inkSoft mt-1">Which lane needs attention, at a glance</div>
-        </div>
-        <div className="inline-flex items-center gap-1.5 bg-linen border border-border rounded-full px-3 py-1.5 text-xs text-inkSoft shadow-soft">
-          <span className="w-1.5 h-1.5 rounded-full bg-ok animate-pulse" />
-          {loading ? "Loading…" : "Updated live"}
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      className="p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full"
+    >
+      <div>
+        <h1 className="text-3xl font-light tracking-wide text-white/90 uppercase">Calibrated Flow</h1>
+        <p className="text-white/60 mt-2">Engineered down to the wire. Automated load balancing across lanes.</p>
       </div>
 
-      {error && <AlertBanner type="error" message="Queue data unavailable" />}
-      {isEmpty && <AlertBanner type="empty" message="No queue data available" />}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {lanes.map((lane, i) => (
+          <LaneCard key={lane.lane || i} lane={lane} />
+        ))}
+      </div>
 
-      {!isEmpty && (
-        <>
-          <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))" }}>
-            {lanes.map((lane) => (
-              <LaneCard key={lane.lane} lane={lane} />
-            ))}
-          </div>
-
-          <div className="panel">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">ETA by lane</h2>
-              <span className="text-xs text-inkSoft">minutes to checkout</span>
-            </div>
-            <QueueETAChart lanes={lanes} />
-          </div>
-        </>
-      )}
-    </div>
+      <div className="bg-[#111111]/40 border border-white/10 rounded-lg p-8 mt-4">
+        <h3 className="text-white/60 text-xs tracking-widest uppercase mb-8">ETA Distribution</h3>
+        <QueueETAChart data={lanes} />
+      </div>
+    </motion.div>
   );
 }

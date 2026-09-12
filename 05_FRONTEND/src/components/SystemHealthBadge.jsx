@@ -1,27 +1,20 @@
-// Radial gauge + label for overall system health.
+// 05_FRONTEND/src/components/SystemHealthBadge.jsx
+import React from 'react';
 
-export default function SystemHealthBadge({ healthy, pct = 0, note }) {
+export default function SystemHealthBadge({ status }) {
+  const isHealthy = status === 'connected';
+  const colorClass = isHealthy ? 'bg-white/20' : 'bg-[#E11D48]';
+  const textClass = isHealthy ? 'text-white/60' : 'text-[#E11D48] drop-shadow-[0_0_8px_rgba(225,29,72,0.8)]';
+
   return (
-    <div className="flex items-center justify-between gap-4">
-      <div>
-        <div className="text-[11px] uppercase tracking-wide text-inkSoft font-semibold mb-2">
-          System health
-        </div>
-        <div className="font-display text-2xl font-bold text-leafDeep">
-          {healthy ? "Nominal" : "Degraded"}
-        </div>
-        <div className="text-[11.5px] text-inkSoft mt-1">{note}</div>
+    <div className="flex items-center gap-3 border border-white/10 bg-white/5 rounded-full px-4 py-1.5">
+      <div className="relative flex h-2 w-2">
+        {!isHealthy && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E11D48] opacity-60"></span>}
+        <span className={`relative inline-flex rounded-full h-2 w-2 ${colorClass}`}></span>
       </div>
-      <div
-        className="w-[46px] h-[46px] rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-500"
-        style={{
-          background: `conic-gradient(#71866A ${pct}%, #E4E7DE 0)`,
-        }}
-      >
-        <div className="w-[34px] h-[34px] rounded-full bg-linen flex items-center justify-center text-[9.5px] font-bold text-leafDeep">
-          {pct}%
-        </div>
-      </div>
+      <span className={`text-xs uppercase tracking-widest font-medium ${textClass}`}>
+        {status}
+      </span>
     </div>
   );
 }

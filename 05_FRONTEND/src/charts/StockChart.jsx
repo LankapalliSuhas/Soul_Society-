@@ -1,25 +1,33 @@
-// Stock-levels-vs-par bar chart, color matches each item's status.
+// 05_FRONTEND/src/charts/StockChart.jsx
+import React from 'react';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts';
 
-const COLOR = { critical: "#A76B62", low: "#B78B55", ok: "#71866A" };
+export default function StockChart({ data = [] }) {
+  const chartData = data.slice(0, 5).map(d => ({
+    name: d.sku,
+    stock: d.estimated_quantity ?? d.stock
+  }));
 
-export default function StockChart({ items = [] }) {
   return (
-    <div>
-      {items.map((item) => {
-        const pct = item.par ? Math.min(100, (item.stock / item.par) * 100) : 0;
-        return (
-          <div key={item.sku} className="flex items-center gap-2.5 mb-2.5">
-            <div className="w-16 text-xs text-inkSoft flex-shrink-0">{item.sku}</div>
-            <div className="flex-1 h-[9px] rounded-full bg-spring overflow-hidden">
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${pct}%`, background: COLOR[item.status] || COLOR.ok }}
-              />
-            </div>
-            <div className="w-9 text-right text-xs text-inkSoft flex-shrink-0">{item.stock}</div>
-          </div>
-        );
-      })}
+    <div className="h-64 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+          <defs>
+            <linearGradient id="colorStock" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="rgba(255,255,255,0.3)" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="rgba(255,255,255,0.0)" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="name" stroke="rgba(255,255,255,0.2)" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} />
+          <YAxis stroke="rgba(255,255,255,0.2)" tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 12 }} />
+          <Tooltip
+            cursor={{ stroke: 'rgba(255,255,255,0.2)' }}
+            contentStyle={{ backgroundColor: '#111', border: '1px solid rgba(255,255,255,0.1)' }}
+            itemStyle={{ color: '#fff' }}
+          />
+          <Area type="monotone" dataKey="stock" stroke="rgba(255,255,255,0.6)" fillOpacity={1} fill="url(#colorStock)" />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }

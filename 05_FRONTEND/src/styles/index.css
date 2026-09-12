@@ -1,43 +1,30 @@
+/* 05_FRONTEND/src/styles/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-oat text-ink font-body antialiased;
-    position: relative;
-  }
-
-  /* Subtle linen-weave texture across the whole app — very low opacity */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.05;
-    background-image: repeating-linear-gradient(
-        45deg,
-        #405443 0 1px,
-        transparent 1px 7px
-      ),
-      repeating-linear-gradient(-45deg, #405443 0 1px, transparent 1px 7px);
-  }
-
-  h1,
-  h2,
-  h3 {
-    @apply font-display text-ink;
-  }
-
-  #root {
-    position: relative;
-    z-index: 1;
+    @apply bg-[#050505] text-white/90 antialiased selection:bg-[#E11D48]/30 selection:text-white font-sans;
+    overflow-x: hidden;
   }
 }
 
-@layer components {
-  .panel {
-    @apply bg-linen border border-border rounded-lg p-5 shadow-soft;
-  }
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
 }

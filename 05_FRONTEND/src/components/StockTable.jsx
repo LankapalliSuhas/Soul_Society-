@@ -1,65 +1,52 @@
-// Inventory table. Only displays fields actually present on each item.
 
-const STATUS_BADGE = {
-  critical: "bg-roseBg text-rose",
-  low: "bg-amberBg text-amber",
-  ok: "bg-okBg text-ok",
-};
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const ROW_TINT = {
-  critical: "bg-rose/[0.07]",
-  low: "bg-amber/[0.08]",
-};
-
-export default function StockTable({ items = [] }) {
-  const sorted = [...items].sort(
-    (a, b) => (a.status === "critical" ? -1 : 1) - (b.status === "critical" ? -1 : 1)
-  );
-
+export default function StockTable({ inventory = [] }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-sm">
+    <div className="w-full overflow-x-auto">
+      <table className="w-full text-left border-collapse">
         <thead>
-          <tr>
-            {["SKU", "Product", "Stock", "Status", "Confidence"].map((h) => (
-              <th
-                key={h}
-                className="text-left text-[11px] uppercase tracking-wide text-inkSoft font-semibold pb-2.5 border-b border-border"
-              >
-                {h}
-              </th>
-            ))}
+          <tr className="border-b border-white/10 text-white/40 text-xs uppercase tracking-widest">
+            <th className="py-4 px-4 font-normal">SKU / Item</th>
+            <th className="py-4 px-4 font-normal text-right">Current Stock</th>
+            <th className="py-4 px-4 font-normal text-right">Status</th>
+            <th className="py-4 px-4 font-normal text-right">Confidence</th>
           </tr>
         </thead>
         <tbody>
-          {sorted.map((item) => (
-            <tr key={item.sku} className={`border-b border-borderSoft last:border-none ${ROW_TINT[item.status] || ""}`}>
-              <td className="py-3 font-semibold">{item.sku}</td>
-              <td className="py-3">{item.name}</td>
-              <td className="py-3">
-                {item.stock}
-                {item.par != null ? ` / ${item.par}` : ""}
-              </td>
-              <td className="py-3">
-                <span className={`inline-flex items-center text-[11.5px] font-semibold px-2.5 py-0.5 rounded-full ${STATUS_BADGE[item.status] || STATUS_BADGE.ok}`}>
-                  {item.status}
-                </span>
-              </td>
-              <td className="py-3">
-                {item.confidence != null && (
-                  <>
-                    <span className="inline-block align-middle w-[70px] h-[5px] rounded-full bg-spring overflow-hidden mr-2">
-                      <span
-                        className="block h-full bg-leaf"
-                        style={{ width: `${Math.round(item.confidence * 100)}%` }}
-                      />
-                    </span>
-                    {Math.round(item.confidence * 100)}%
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
+          <AnimatePresence>
+            {inventory.map((item, i) => (
+              <motion.tr
+                key={item.sku}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05, stiffness: 100, damping: 30 }}
+                className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+              >
+                <td className="py-4 px-4">
+                  <div className="text-white/90 font-medium">{item.name || item.sku}</div>
+                  <div className="text-white/40 text-xs font-mono mt-1">{item.sku} • {item.shelf_id || 'UNKNOWN'}</div>
+                </td>
+                <td className="py-4 px-4 text-right text-lg font-light text-white/80">
+                  {item.estimated_quantity ?? item.stock}
+                </td>
+                <td className="py-4 px-4 text-right">
+                  <span className={`text-xs tracking-widest uppercase px-2 py-1 rounded ${item.status === 'CRITICAL' || item.status === 'OUT_OF_STOCK' || item.status === 'critical'
+                      ? 'bg-[#E11D48]/20 text-[#E11D48]'
+                      : item.status === 'LOW' || item.status === 'low'
+                        ? 'bg-yellow-500/20 text-yellow-500'
+                        : 'bg-white/10 text-white/60'
+                    }`}>
+                    {item.status}
+                  </span>
+                </td>
+                <td className="py-4 px-4 text-right font-mono text-white/40 text-sm">
+                  {((item.confidence || 0) * 100).toFixed(0)}%
+                </td>
+              </motion.tr>
+            ))}
+          </AnimatePresence>
         </tbody>
       </table>
     </div>

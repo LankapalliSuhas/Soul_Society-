@@ -1,40 +1,40 @@
-// Vertical event timeline. Newest event first, with a distinct treatment
-// for the just-arrived item and for malformed/unparseable events.
 
-function formatTime(t) {
-  const d = t instanceof Date ? t : new Date(t);
-  return d.toTimeString().slice(0, 8);
-}
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function EventTimeline({ events = [], limit = 20 }) {
-  const list = events.slice(0, limit);
-
-  if (list.length === 0) {
-    return <div className="text-sm text-inkSoft">No events yet.</div>;
-  }
-
+export default function EventTimeline({ events = [] }) {
   return (
-    <div className="relative pl-1.5">
-      {list.map((e, idx) => {
-        const isNew = idx === 0 && e.type !== "MALFORMED_EVENT";
-        const isMalformed = e.type === "MALFORMED_EVENT";
-        const dotColor = isMalformed ? "bg-amber" : isNew ? "bg-rose" : "bg-leaf";
-        const typeColor = isMalformed ? "text-amber" : isNew ? "text-rose" : "text-leafDeep";
-
-        return (
-          <div key={idx} className="flex gap-3.5 py-2.5">
-            <div className="flex flex-col items-center w-2.5">
-              <span className={`w-2 h-2 rounded-full mt-1 ${dotColor}`} />
-              {idx < list.length - 1 && <span className="flex-1 w-px bg-border mt-1" />}
+    <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto pr-4">
+      <AnimatePresence>
+        {events.map((ev, i) => (
+          <motion.div
+            key={`${ev.event_id || i}-${ev.time}`}
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ stiffness: 100, damping: 30 }}
+            className="flex gap-4 items-start p-4 bg-[#111111]/40 border border-white/5 rounded-lg backdrop-blur-sm"
+          >
+            <div className="text-white/40 font-mono text-xs w-20 shrink-0 mt-0.5">
+              {new Date(ev.time || ev.timestamp).toLocaleTimeString([], { hour12: false })}
             </div>
-            <div className="flex-1 pb-0.5">
-              <div className="text-[11px] text-inkSoft tabular-nums">{formatTime(e.time)}</div>
-              <div className={`text-[12.5px] font-bold tracking-wide my-0.5 ${typeColor}`}>{e.type}</div>
-              <div className="text-[12.5px] text-inkSoft">{e.detail}</div>
+            <div className="flex-1">
+              <div className={`text-xs uppercase tracking-widest font-medium mb-1 ${ev.type === 'ALERT' ? 'text-[#E11D48]' : 'text-white/80'
+                }`}>
+                {ev.type || ev.event_type}
+              </div>
+              <div className="text-white/60 text-sm">
+                {ev.detail || (ev.payload ? JSON.stringify(ev.payload) : 'Raw event received')}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          </motion.div>
+        ))}
+      </AnimatePresence>
+      {events.length === 0 && (
+        <div className="text-white/40 text-sm py-8 text-center italic">
+          Awaiting sensor data...
+        </div>
+      )}
     </div>
   );
 }

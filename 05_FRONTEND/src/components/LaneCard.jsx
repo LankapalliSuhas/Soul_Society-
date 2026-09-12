@@ -1,60 +1,48 @@
-// A single queue lane. Only renders fields it's actually given — no
-// frontend-side calculation of burden, ETA, or status.
 
-const STATUS_BADGE = {
-  critical: "bg-roseBg text-rose",
-  busy: "bg-amberBg text-amber",
-  clear: "bg-okBg text-ok",
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Users, Clock, ShoppingCart } from 'lucide-react';
 
 export default function LaneCard({ lane }) {
-  const { lane: id, people_count, eta_min, burden, status } = lane;
-  const isAttention = status === "critical";
+  const isCritical = lane.status === 'critical' || lane.status === 'CRITICAL';
 
   return (
-    <div
-      className={`relative rounded-lg border p-5 shadow-soft ${
-        isAttention ? "border-rose/60 bg-roseBg" : "border-border bg-linen"
-      }`}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      layout
+      transition={{ stiffness: 100, damping: 30 }}
+      className={`p-6 border rounded-lg backdrop-blur-sm ${isCritical ? 'border-[#E11D48]/50 bg-[#E11D48]/10' : 'border-white/10 bg-[#111111]/40'
+        }`}
     >
-      {isAttention && (
-        <div className="absolute top-4 right-5 text-[10.5px] font-bold uppercase tracking-wide text-rose">
-          Attention
-        </div>
-      )}
-
-      <div className="flex justify-between items-start mb-3.5">
-        <div className="font-display font-bold text-sm text-leafDeep">
-          LANE {String(id).replace("L", "")}
-        </div>
-        <span className={`inline-flex items-center text-[11.5px] font-semibold px-2.5 py-0.5 rounded-full ${STATUS_BADGE[status] || STATUS_BADGE.clear}`}>
-          {status}
+      <div className="flex justify-between items-start mb-6">
+        <h3 className={`text-lg tracking-widest font-medium ${isCritical ? 'text-[#E11D48]' : 'text-white/90'}`}>
+          {lane.lane}
+        </h3>
+        <span className={`text-xs uppercase tracking-widest px-2 py-1 rounded ${isCritical ? 'bg-[#E11D48]/20 text-[#E11D48]' : 'bg-white/10 text-white/60'
+          }`}>
+          {lane.status}
         </span>
       </div>
 
-      <div className="font-display text-[26px] font-bold mb-3.5">
-        {people_count} <small className="text-xs font-medium text-inkSoft">people</small>
-      </div>
-
-      {burden != null && (
-        <div className="mb-2.5">
-          <div className="text-[10.5px] uppercase tracking-wide text-inkSoft mb-1.5">Item burden</div>
-          <div className="h-1.5 rounded-full bg-spring overflow-hidden">
-            <div
-              className="h-full rounded-full"
-              style={{
-                width: `${Math.round(burden * 100)}%`,
-                background: isAttention ? "#A76B62" : status === "busy" ? "#B78B55" : "#71866A",
-              }}
-            />
-          </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1">
+          <span className="text-white/40 text-xs uppercase flex items-center gap-1.5"><Users size={12} /> People</span>
+          <span className="text-2xl font-light text-white/90">{lane.people_count}</span>
         </div>
-      )}
 
-      <div>
-        <div className="text-[10.5px] uppercase tracking-wide text-inkSoft mb-1.5">ETA</div>
-        <div className="text-[15px] font-bold">{eta_min} min</div>
+        <div className="flex flex-col gap-1">
+          <span className="text-white/40 text-xs uppercase flex items-center gap-1.5"><Clock size={12} /> ETA (min)</span>
+          <span className={`text-2xl font-light ${isCritical ? 'text-[#E11D48]' : 'text-white/90'}`}>
+            {lane.estimated_wait_seconds ? Math.round(lane.estimated_wait_seconds / 60) : lane.eta_min}
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 col-span-2 mt-2 pt-4 border-t border-white/5">
+          <span className="text-white/40 text-xs uppercase flex items-center gap-1.5"><ShoppingCart size={12} /> Avg Item Burden</span>
+          <span className="text-sm text-white/70">{lane.item_burden || lane.burden}</span>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
