@@ -9,7 +9,7 @@
     {
       "device_id": "esp32_cam_queue",
       "type": "camera",
-      "mqtt_topic": "netra/queue",
+      "mqtt_topic": "-netra/queue",
       "data_expected": ["QUEUE_UPDATE"]
     },
     {
