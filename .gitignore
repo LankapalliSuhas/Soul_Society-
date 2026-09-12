@@ -1,0 +1,141 @@
+# ============================================================
+# NETRA — Root .gitignore
+# ============================================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ---------- FastAPI / Uvicorn ----------
+*.log
+uvicorn.pid
+
+# ---------- Environment / Secrets ----------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials.json
+
+# ---------- SQLite / Databases ----------
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+99_RUNTIME/database/*.db
+99_RUNTIME/database/*.db-journal
+
+# ---------- Runtime artifacts ----------
+99_RUNTIME/logs/*
+!99_RUNTIME/logs/.gitkeep
+99_RUNTIME/temporary/*
+!99_RUNTIME/temporary/.gitkeep
+99_RUNTIME/captures/*
+!99_RUNTIME/captures/.gitkeep
+99_RUNTIME/debug/*
+!99_RUNTIME/debug/.gitkeep
+99_RUNTIME/exports/*
+!99_RUNTIME/exports/.gitkeep
+
+# ---------- Node / Frontend ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+dist/
+build/
+.vite/
+.cache/
+coverage/
+
+# ---------- Testing ----------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# ---------- Jupyter / Notebooks ----------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ---------- Data (don't commit raw datasets) ----------
+*.csv
+*.parquet
+*.h5
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.pth
+*.weights
+*.tflite
+03_AI/models/trained/*
+03_AI/models/exported/*
+!03_AI/models/trained/.gitkeep
+!03_AI/models/exported/.gitkeep
+
+# ---------- Hardware build artifacts ----------
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/.browse.c_cpp.db*
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch/
+*.bin
+*.elf
+*.hex
+*.map
+
+# ---------- OS junk ----------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------- Editor / IDE ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# ---------- Docker ----------
+docker-compose.override.yml
+*.pid
+
+# ---------- Misc ----------
+*.bak
+*.tmp
+*.orig
+*.rej
