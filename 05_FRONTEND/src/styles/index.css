@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-oat text-ink font-body antialiased;
+    position: relative;
+  }
+
+  /* Subtle linen-weave texture across the whole app — very low opacity */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.05;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #405443 0 1px,
+        transparent 1px 7px
+      ),
+      repeating-linear-gradient(-45deg, #405443 0 1px, transparent 1px 7px);
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-linen border border-border rounded-lg p-5 shadow-soft;
+  }
+}
