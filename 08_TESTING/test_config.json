@@ -2,5 +2,23 @@
   "backend_url": "http://localhost:8000",
   "mqtt_broker": "localhost",
   "mqtt_port": 1883,
-  "test_topics": ["netra/test/#"]
+  "test_topics": ["netra/test/#"],
+  
+  "required_tests": {
+    "backend": [
+      "backend_health",
+      "api_request",
+      "event_to_backend"
+    ],
+    "failure": [
+      "backend_unavailable",
+      "mqtt_disconnect",
+      "invalid_event"
+    ]
+  },
+
+  "performance_targets": {
+    "event_to_backend_ms": 500,
+    "api_response_ms": 1000
+  }
 }
