@@ -1,7 +1,7 @@
 # 04_BACKEND/services/inventory_service.py
 from database.database import upsert_inventory
 from websocket.manager import manager
-from services.decision_engine import evaluate_inventory
+
 import json
 from pathlib import Path
 
@@ -25,7 +25,7 @@ async def process_inventory_event(event: dict):
         "confidence": payload.get("confidence", 0.0),
     }
 
-    item["status"] = evaluate_inventory(item)
+
     upsert_inventory(item)
     await manager.broadcast({"type": "INVENTORY_UPDATE", "data": item})
     return item

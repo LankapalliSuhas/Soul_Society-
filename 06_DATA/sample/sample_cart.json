@@ -1,0 +1,22 @@
+[
+  {
+    "cart_id": "cart_1",
+    "timestamp": "2026-09-12T10:00:00Z",
+    "tare_weight_grams": 10000,
+    "current_weight_grams": 11000,
+    "weight_change_grams": 1000,
+    "estimated_item_count": 5,
+    "item_burden": "LOW",
+    "confidence": 0.9
+  },
+  {
+    "cart_id": "cart_2",
+    "timestamp": "2026-09-12T10:01:00Z",
+    "tare_weight_grams": 10000,
+    "current_weight_grams": 25000,
+    "weight_change_grams": 5000,
+    "estimated_item_count": 30,
+    "item_burden": "HIGH",
+    "confidence": 0.85
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "schema_version": 1,
+    "event_id": "evt_1",
+    "timestamp": "2026-09-12T10:00:00Z",
+    "device_id": "cam_1",
+    "event_type": "ENTRY",
+    "zone": "gate_1",
+    "entity_id": "person_1",
+    "payload": {},
+    "confidence": 0.95,
+    "metadata": {}
+  },
+  {
+    "schema_version": 1,
+    "event_id": "evt_2",
+    "timestamp": "2026-09-12T10:01:00Z",
+    "device_id": "cam_1",
+    "event_type": "EXIT",
+    "zone": "gate_1",
+    "entity_id": "person_2",
+    "payload": {},
+    "confidence": 0.90,
+    "metadata": {}
+  },
+  {
+    "schema_version": 1,
+    "event_id": "evt_3",
+    "timestamp": "2026-09-12T10:02:00Z",
+    "device_id": "scale_1",
+    "event_type": "WEIGHT_CHANGE",
+    "zone": "shelf_A",
+    "entity_id": "item_1",
+    "payload": {
+      "weight_change": -200
+    },
+    "confidence": 0.99,
+    "metadata": {}
+  },
+  {
+    "schema_version": 1,
+    "event_id": "evt_4",
+    "timestamp": "2026-09-12T10:03:00Z",
+    "device_id": "engine_1",
+    "event_type": "ALERT",
+    "zone": "store",
+    "entity_id": "alert_1",
+    "payload": {
+      "level": "CRITICAL",
+      "message": "Low stock"
+    },
+    "confidence": 1.0,
+    "metadata": {}
+  }
+]

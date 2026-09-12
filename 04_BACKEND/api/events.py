@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from schemas import Event
-from services.event_processor import process_event
+from database.models import EventModel as Event
+from services.event_service import process_event
 
 router = APIRouter()
 

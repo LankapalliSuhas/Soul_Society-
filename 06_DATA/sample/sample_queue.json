@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-09-12T10:00:00Z",
+    "lane": "lane_1",
+    "people_count": 1,
+    "item_burden": "LOW",
+    "estimated_item_count": 5,
+    "estimated_wait_seconds": 30.0,
+    "service_rate_per_minute": 2.0,
+    "confidence": 0.9,
+    "status": "NORMAL",
+    "item_burden_source": "VISION_ESTIMATE"
+  },
+  {
+    "timestamp": "2026-09-12T10:01:00Z",
+    "lane": "lane_2",
+    "people_count": 5,
+    "item_burden": "MEDIUM",
+    "estimated_item_count": 25,
+    "estimated_wait_seconds": 150.0,
+    "service_rate_per_minute": 2.0,
+    "confidence": 0.85,
+    "status": "WARNING",
+    "item_burden_source": "VISION_ESTIMATE"
+  },
+  {
+    "timestamp": "2026-09-12T10:02:00Z",
+    "lane": "lane_3",
+    "people_count": 10,
+    "item_burden": "HIGH",
+    "estimated_item_count": 50,
+    "estimated_wait_seconds": 300.0,
+    "service_rate_per_minute": 2.0,
+    "confidence": 0.8,
+    "status": "CRITICAL",
+    "item_burden_source": "VISION_ESTIMATE"
+  }
+]

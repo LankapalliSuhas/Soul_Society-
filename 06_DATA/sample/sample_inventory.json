@@ -1,0 +1,38 @@
+[
+  {
+    "sku": "SKU_1",
+    "shelf_id": "shelf_A",
+    "tare_weight_grams": 500,
+    "unit_weight_grams": 100,
+    "current_weight_grams": 1500,
+    "estimated_quantity": 10,
+    "threshold": 2,
+    "status": "NORMAL",
+    "last_updated": "2026-09-12T10:00:00Z",
+    "confidence": 0.95
+  },
+  {
+    "sku": "SKU_2",
+    "shelf_id": "shelf_B",
+    "tare_weight_grams": 500,
+    "unit_weight_grams": 100,
+    "current_weight_grams": 700,
+    "estimated_quantity": 2,
+    "threshold": 5,
+    "status": "LOW",
+    "last_updated": "2026-09-12T10:01:00Z",
+    "confidence": 0.90
+  },
+  {
+    "sku": "SKU_3",
+    "shelf_id": "shelf_C",
+    "tare_weight_grams": 500,
+    "unit_weight_grams": 100,
+    "current_weight_grams": 500,
+    "estimated_quantity": 0,
+    "threshold": 2,
+    "status": "OUT_OF_STOCK",
+    "last_updated": "2026-09-12T10:02:00Z",
+    "confidence": 0.99
+  }
+]
