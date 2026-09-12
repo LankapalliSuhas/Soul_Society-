@@ -1,16 +1,80 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "QueueItem",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "netra://schemas/queue/v1",
+  "title": "NETRA Queue Record",
   "type": "object",
-  "required": ["timestamp", "lane", "people_count", "item_burden", "estimated_wait_seconds", "service_rate_per_minute", "confidence", "status"],
+  "additionalProperties": false,
+  "required": [
+    "timestamp",
+    "lane",
+    "people_count",
+    "item_burden",
+    "estimated_wait_seconds",
+    "item_burden_source",
+    "status",
+    "confidence"
+  ],
   "properties": {
-    "timestamp": {"type": "string"},
-    "lane": {"type": "string"},
-    "people_count": {"type": "integer"},
-    "item_burden": {"type": "string"},
-    "estimated_wait_seconds": {"type": "integer"},
-    "service_rate_per_minute": {"type": "number"},
-    "confidence": {"type": "number"},
-    "status": {"type": "string"}
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lane": {
+      "type": "string",
+      "minLength": 1
+    },
+    "people_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "item_burden": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNKNOWN"
+      ]
+    },
+    "estimated_item_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "estimated_wait_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "service_rate_per_minute": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "WARNING",
+        "CRITICAL"
+      ]
+    },
+    "item_burden_source": {
+      "type": "string",
+      "enum": [
+        "CART_SENSOR",
+        "VISION_ESTIMATE",
+        "HISTORICAL_ESTIMATE",
+        "UNKNOWN"
+      ]
+    }
   }
 }

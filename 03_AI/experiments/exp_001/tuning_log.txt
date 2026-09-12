@@ -1,0 +1,5 @@
+# 03_AI/experiments/exp_001/tuning_log.txt
+[EXP_001] Inventory Weight Threshold Tuning
+Run 1: Tolerance 50g -> 12% false negative rate (missed light items)
+Run 2: Tolerance 80g -> 2% false negative rate, stable against sensor noise.
+Result: Locked AI_CONFIG weight_tolerance_grams to 80.

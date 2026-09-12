@@ -1,12 +1,47 @@
 {
-  "rest": {
-    "GET /api/health": "health check",
-    "POST /api/events": "ingest event",
-    "GET /api/inventory": "inventory list",
-    "GET /api/queue": "queue list",
-    "GET /api/cart": "cart list",
-    "GET /api/alerts": "alerts list",
-    "GET /api/dashboard": "dashboard summary"
+  "api_version": "v1",
+  "base_path": "/api",
+  "endpoints": {
+    "health": {
+      "method": "GET",
+      "path": "/health",
+      "owner": "Soham"
+    },
+    "events": {
+      "method": "POST",
+      "path": "/events",
+      "owner": "Soham"
+    },
+    "entry_exit": {
+      "method": "POST",
+      "path": "/entry-exit",
+      "owner": "Soham"
+    },
+    "inventory": {
+      "method": "GET",
+      "path": "/inventory",
+      "owner": "Phantom_Soham"
+    },
+    "queue": {
+      "method": "GET",
+      "path": "/queue",
+      "owner": "Phantom_Soham"
+    },
+    "cart": {
+      "method": "GET",
+      "path": "/cart",
+      "owner": "Phantom_Soham"
+    },
+    "alerts": {
+      "method": "GET",
+      "path": "/alerts",
+      "owner": "Soham"
+    },
+    "dashboard": {
+      "method": "GET",
+      "path": "/dashboard",
+      "owner": "Soham"
+    }
   },
   "websocket": {
     "path": "/ws/live",

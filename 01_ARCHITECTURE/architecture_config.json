@@ -1,0 +1,57 @@
+{
+    "architecture_version": "1.0",
+    "architecture_style": "edge_first_event_driven",
+    "layers": [
+        {
+            "id": "L1",
+            "name": "sensing",
+            "description": "Cameras and physical sensors observe store events; raw camera frames remain local and are not persisted."
+        },
+        {
+            "id": "L2",
+            "name": "communication",
+            "description": "MQTT transports compact device events over the local network."
+        },
+        {
+            "id": "L3",
+            "name": "ingestion",
+            "description": "FastAPI/MQTT ingestion validates, normalizes and routes incoming events."
+        },
+        {
+            "id": "L4",
+            "name": "intelligence",
+            "description": "Edge models and deterministic analytics infer occupancy, inventory changes, cart burden and queue ETA."
+        },
+        {
+            "id": "L5",
+            "name": "decision",
+            "description": "Decision rules convert validated intelligence into alerts and operational recommendations."
+        },
+        {
+            "id": "L6",
+            "name": "presentation",
+            "description": "The manager dashboard and queue display expose real-time operational information."
+        }
+    ],
+    "data_flow": [
+        "hardware",
+        "mqtt",
+        "ingestion",
+        "database",
+        "intelligence",
+        "decision_engine",
+        "api",
+        "websocket",
+        "frontend"
+    ],
+    "principles": [
+        "local_first",
+        "event_driven",
+        "modular",
+        "privacy_by_design",
+        "fail_safe",
+        "replaceable_components",
+        "measurable_performance",
+        "single_source_of_truth"
+    ]
+}

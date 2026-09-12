@@ -1,17 +1,73 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Event",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "netra://schemas/event/v1",
+  "title": "NETRA Event",
   "type": "object",
-  "required": ["schema_version", "event_id", "timestamp", "device_id", "event_type"],
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp",
+    "device_id",
+    "event_type"
+  ],
   "properties": {
-    "schema_version": {"type": "integer"},
-    "event_id": {"type": "string"},
-    "timestamp": {"type": "string"},
-    "device_id": {"type": "string"},
-    "event_type": {"type": "string"},
-    "zone": {"type": "string"},
-    "value": {"type": "number"},
-    "unit": {"type": "string"},
-    "payload": {"type": "object"}
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "device_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "ENTRY",
+        "EXIT",
+        "WEIGHT_CHANGE",
+        "ITEM_REMOVED",
+        "ITEM_ADDED",
+        "INVENTORY_UPDATE",
+        "CART_UPDATE",
+        "QUEUE_UPDATE",
+        "ALERT",
+        "HEALTH"
+      ]
+    },
+    "zone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "entity_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "metadata": {
+      "type": "object"
+    }
   }
 }
