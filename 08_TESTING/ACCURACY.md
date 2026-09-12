@@ -3,13 +3,13 @@
 *Note: As per demo_config, these are strict target metrics until live system measurement is completed in Checkpoint 3.*
 
 ## Person Detection Target
-- **Target Confidence**: > 0.60
-- **Target False Positive Rate**: < 5%
+- **Target Confidence**: PENDING MEASUREMENT — requires live sensor data.
+- **Target False Positive Rate**: PENDING MEASUREMENT — requires live sensor data.
 
 ## Inventory Weight Target
-- **Target Tolerance**: 80 grams
-- **Target Inference Accuracy**: 95% on known SKUs
+- **Target Tolerance**: PENDING MEASUREMENT — requires live sensor data.
+- **Target Inference Accuracy**: PENDING MEASUREMENT — requires live sensor data.
 
 ## Queue Estimation Target
-- **Target ETA Error**: < 15% deviation from actual wait time.
-- **Target Latency**: PENDING MEASUREMENT
+- **Target ETA Error**: PENDING MEASUREMENT — requires live sensor data.
+- **Target Latency**: PENDING MEASUREMENT — requires live sensor data.
