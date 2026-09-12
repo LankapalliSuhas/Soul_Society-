@@ -1,0 +1,45 @@
+{
+    "config_version": "1.0",
+    "person_detection": {
+        "enabled": true,
+        "confidence_threshold": 0.6,
+        "duplicate_event_window_seconds": 3,
+        "line_crossing_enabled": true
+    },
+    "inventory": {
+        "enabled": true,
+        "weight_tolerance_grams": 80,
+        "minimum_stable_readings": 5,
+        "low_stock_threshold": 2,
+        "maximum_event_gap_seconds": 10
+    },
+    "cart": {
+        "enabled": true,
+        "weight_tolerance_grams": 80,
+        "stability_window_seconds": 2,
+        "minimum_change_grams": 100
+    },
+    "sensor_fusion": {
+        "enabled": true,
+        "minimum_confidence": 0.7,
+        "weights": {
+            "shelf": 0.5,
+            "cart": 0.4,
+            "pir": 0.1
+        }
+    },
+    "queue": {
+        "enabled": true,
+        "warning_people": 4,
+        "critical_people": 6,
+        "base_service_time_seconds": 30,
+        "per_item_time_seconds": 5,
+        "maximum_eta_minutes": 60
+    },
+    "decision_engine": {
+        "enabled": true,
+        "restock_alert": true,
+        "queue_alert": true,
+        "counter_recommendation": true
+    }
+}

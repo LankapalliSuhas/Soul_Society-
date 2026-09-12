@@ -1,0 +1,35 @@
+{
+    "registry_version": "1.0",
+    "models": [
+        {
+            "model_id": "person_detector_v1",
+            "name": "NETRA Person Detector",
+            "task": "person_detection",
+            "framework": "FOMO",
+            "version": "1.0.0",
+            "status": "evaluation",
+            "location": "03_AI/models/exported/",
+            "input_type": "image",
+            "output_type": "detections",
+            "confidence_threshold": 0.6
+        }
+    ],
+    "fallbacks": [
+        {
+            "primary_model": "person_detector_v1",
+            "fallback": "local_opencv_or_yolo",
+            "reason": "ESP32 inference failure or insufficient accuracy"
+        }
+    ],
+    "evaluation": {
+        "required_metrics": [
+            "accuracy",
+            "precision",
+            "recall",
+            "latency",
+            "false_positive_rate",
+            "false_negative_rate"
+        ],
+        "target_values_source": "08_TESTING/ACCURACY.md"
+    }
+}

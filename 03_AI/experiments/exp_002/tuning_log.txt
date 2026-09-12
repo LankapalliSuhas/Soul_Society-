@@ -1,0 +1,5 @@
+# 03_AI/experiments/exp_002/tuning_log.txt
+[EXP_002] Person Detection Confidence Tuning
+Run 1: Threshold 0.5 -> Heavy false positives from reflections.
+Run 2: Threshold 0.6 -> Stable person tracking, low noise.
+Result: Locked AI_CONFIG confidence_threshold to 0.6.
