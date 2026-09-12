@@ -1,8 +1,8 @@
+# 04_BACKEND/mqtt/topics.py
 TOPICS = {
-    "events": "netra/events/#",
-    "entry": "netra/entry",
-    "exit": "netra/exit",
-    "inventory": "netra/inventory/#",
-    "cart": "netra/cart/#",
-    "queue": "netra/queue/#",
+    "entry_exit": "netra/entry_exit",
+    "shelf": "netra/shelf/+",
+    "cart": "netra/cart/+",
+    "queue": "netra/queue",
+    "health": "netra/system/health"
 }
