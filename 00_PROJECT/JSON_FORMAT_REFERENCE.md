@@ -100,21 +100,125 @@ The owner responsible for the most JSON files is **Unknown**.
 ```
 
 ## 02_HARDWARE/hardware_registry.json
-**Owner:** Akash (P3)
-**Read by:** .
+**Owner:** Mighty (P5)
+**Read by:** Soham, Phantom, Akash, Team+1
 **Purpose:** Configuration file
 
-**FILE MISSING / EMPTY — not yet populated**
-*(Schema below inferred from purpose/contract where possible, otherwise blank)*
-
+### LOCKED SCHEMA — DO NOT MODIFY WITHOUT TEAM SIGN-OFF
 **Schema:**
 | Field (dot-path) | Type | Required | Allowed values / enum | Notes |
 |---|---|---|---|---|
-| N/A | N/A | N/A | N/A | No structure available |
+| `registry_version` | str | Yes | - | Value: 1.0 |
+| `last_updated` | str | Yes | - | ISO 8601 timestamp |
+| `devices` | array | Yes | - | Array of objects |
+| `devices[].device_id` | str | Yes | - | Matches device_registry.json exactly |
+| `devices[].type` | str | Yes | ESP32-CAM, ESP32-WROOM | - |
+| `devices[].camera` | str | Yes | OV2640, null | - |
+| `devices[].quantity` | int | Yes | - | - |
+| `devices[].role` | str | Yes | entry_exit, queue_detection, shelf_sensor, cart_sensor | Maps to sensor_fusion weights |
+| `devices[].mqtt_topic` | str | Yes | - | Must match integration_config.json exactly |
+| `devices[].location` | str | Yes | - | - |
+| `devices[].calibration_ref` | str | Yes | - | Relative path or null |
+| `components` | array | Yes | - | Array of objects |
+| `components[].component_id` | str | Yes | - | - |
+| `components[].type` | str | Yes | HX711, load_cell, PIR | - |
+| `components[].quantity` | int | Yes | - | - |
+| `components[].role` | str | Yes | shelf_weight, cart_weight, cart_motion, spare | Maps to sensor_fusion weights |
+| `availability_note` | str | Yes | - | Marks explicitly active hardware |
 
 **Actual current content:**
 ```json
-// EMPTY FILE
+{
+  "registry_version": "1.0",
+  "last_updated": "2026-09-12T22:50:25Z",
+  "devices": [
+    {
+      "device_id": "esp32_cam_entry",
+      "type": "ESP32-CAM",
+      "camera": "OV2640",
+      "quantity": 1,
+      "role": "entry_exit",
+      "mqtt_topic": "netra/entry",
+      "location": "store_entrance",
+      "calibration_ref": null
+    },
+    {
+      "device_id": "esp32_cam_queue",
+      "type": "ESP32-CAM",
+      "camera": "OV2640",
+      "quantity": 1,
+      "role": "queue_detection",
+      "mqtt_topic": "netra/queue",
+      "location": "checkout_zone",
+      "calibration_ref": null
+    },
+    {
+      "device_id": "esp32_sensor_node",
+      "type": "ESP32-WROOM",
+      "camera": null,
+      "quantity": 1,
+      "role": "shelf_sensor",
+      "mqtt_topic": "netra/events/weight",
+      "location": "shelf_A",
+      "calibration_ref": "calibration/shelf_A"
+    },
+    {
+      "device_id": "cart_node",
+      "type": "ESP32-WROOM",
+      "camera": null,
+      "quantity": 1,
+      "role": "cart_sensor",
+      "mqtt_topic": "netra/cart",
+      "location": "shopping_cart_01",
+      "calibration_ref": "calibration/cart_01"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "hx711_shelf_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "shelf_weight"
+    },
+    {
+      "component_id": "hx711_cart_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "cart_weight"
+    },
+    {
+      "component_id": "hx711_spare_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "spare"
+    },
+    {
+      "component_id": "load_cell_shelf_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "shelf_weight"
+    },
+    {
+      "component_id": "load_cell_cart_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "cart_weight"
+    },
+    {
+      "component_id": "load_cell_spare_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "spare"
+    },
+    {
+      "component_id": "pir_cart_01",
+      "type": "PIR",
+      "quantity": 1,
+      "role": "cart_motion"
+    }
+  ],
+  "availability_note": "Only hardware explicitly present in the team's actual BOM is marked active"
+}
 ```
 
 ## 03_AI/AI_CONFIG.json

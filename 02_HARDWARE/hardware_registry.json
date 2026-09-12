@@ -1,0 +1,91 @@
+{
+  "registry_version": "1.0",
+  "last_updated": "2026-09-12T22:50:25Z",
+  "devices": [
+    {
+      "device_id": "esp32_cam_entry",
+      "type": "ESP32-CAM",
+      "camera": "OV2640",
+      "quantity": 1,
+      "role": "entry_exit",
+      "mqtt_topic": "netra/entry",
+      "location": "store_entrance",
+      "calibration_ref": null
+    },
+    {
+      "device_id": "esp32_cam_queue",
+      "type": "ESP32-CAM",
+      "camera": "OV2640",
+      "quantity": 1,
+      "role": "queue_detection",
+      "mqtt_topic": "netra/queue",
+      "location": "checkout_zone",
+      "calibration_ref": null
+    },
+    {
+      "device_id": "esp32_sensor_node",
+      "type": "ESP32-WROOM",
+      "camera": null,
+      "quantity": 1,
+      "role": "shelf_sensor",
+      "mqtt_topic": "netra/events/weight",
+      "location": "shelf_A",
+      "calibration_ref": "calibration/shelf_A"
+    },
+    {
+      "device_id": "cart_node",
+      "type": "ESP32-WROOM",
+      "camera": null,
+      "quantity": 1,
+      "role": "cart_sensor",
+      "mqtt_topic": "netra/cart",
+      "location": "shopping_cart_01",
+      "calibration_ref": "calibration/cart_01"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "hx711_shelf_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "shelf_weight"
+    },
+    {
+      "component_id": "hx711_cart_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "cart_weight"
+    },
+    {
+      "component_id": "hx711_spare_01",
+      "type": "HX711",
+      "quantity": 1,
+      "role": "spare"
+    },
+    {
+      "component_id": "load_cell_shelf_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "shelf_weight"
+    },
+    {
+      "component_id": "load_cell_cart_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "cart_weight"
+    },
+    {
+      "component_id": "load_cell_spare_01",
+      "type": "load_cell",
+      "quantity": 1,
+      "role": "spare"
+    },
+    {
+      "component_id": "pir_cart_01",
+      "type": "PIR",
+      "quantity": 1,
+      "role": "cart_motion"
+    }
+  ],
+  "availability_note": "Only hardware explicitly present in the team's actual BOM is marked active"
+}
