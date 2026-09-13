@@ -54,7 +54,7 @@ export default function Cover({ onEnter }) {
             { label: "People in store", value: "128" },
             { label: "SKUs low", value: "4" },
           ].map((s) => (
-            <div key={s.label} className="bg-forestDeep border border-white/10 rounded-full px-5 py-2.5 flex items-center gap-2">
+            <div key={s.label} className="bg-forestDeep border border-neutral-200 rounded-full px-5 py-2.5 flex items-center gap-2">
               <span className="font-display font-bold text-gold text-base">{s.value}</span>
               <span className="text-[11.5px] text-oat/60">{s.label}</span>
             </div>

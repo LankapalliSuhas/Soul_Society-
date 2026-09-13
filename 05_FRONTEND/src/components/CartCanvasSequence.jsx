@@ -1,4 +1,3 @@
-// 05_FRONTEND/src/components/CartCanvasSequence.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -9,7 +8,15 @@ export default function CartCanvasSequence({ onLoaded }) {
   const frames = useRef([]);
   const totalFrames = 144;
 
+  const [hasPlayed, setHasPlayed] = useState(() => sessionStorage.getItem('cartIntroPlayed') === 'true');
+
   useEffect(() => {
+    if (hasPlayed) {
+      setIsLoaded(true);
+      onLoaded?.();
+      return;
+    }
+    
     let loaded = 0;
     for (let i = 0; i < totalFrames; i++) {
       const img = new Image();
@@ -26,7 +33,7 @@ export default function CartCanvasSequence({ onLoaded }) {
       frames.current.push(img);
     }
     return () => { frames.current = []; };
-  }, [onLoaded]);
+  }, [onLoaded, hasPlayed]);
 
   const playSequence = () => {
     const canvas = canvasRef.current;
@@ -35,7 +42,11 @@ export default function CartCanvasSequence({ onLoaded }) {
     let currentFrame = 0;
 
     const draw = () => {
-      if (currentFrame >= totalFrames) return;
+      if (currentFrame >= totalFrames) {
+        sessionStorage.setItem('cartIntroPlayed', 'true');
+        setHasPlayed(true);
+        return; // Stops requestAnimationFrame
+      }
       const img = frames.current[currentFrame];
       if (img && img.complete) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -64,19 +75,23 @@ export default function CartCanvasSequence({ onLoaded }) {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
-      {!isLoaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#050505] z-10 pointer-events-auto">
-          <div className="text-white/60 tracking-widest text-sm mb-4">INITIALIZING NEURAL SENSORS</div>
-          <div className="w-48 h-px bg-white/20 relative overflow-hidden">
+      {!isLoaded && !hasPlayed && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#FAFAFA] z-10 pointer-events-auto">
+          <div className="text-neutral-500 tracking-widest text-sm mb-4">INITIALIZING NEURAL SENSORS</div>
+          <div className="w-48 h-px bg-neutral-300 relative overflow-hidden">
             <motion.div
               className="absolute inset-y-0 left-0 bg-[#E11D48]"
               initial={{ width: 0 }} animate={{ width: `${progress}%` }}
             />
           </div>
-          <div className="text-white/90 font-mono text-xs mt-4">{progress}%</div>
+          <div className="text-neutral-900 font-mono text-xs mt-4">{progress}%</div>
         </div>
       )}
-      <canvas ref={canvasRef} className="w-full h-full object-contain mix-blend-screen opacity-40" />
+      {!hasPlayed ? (
+        <canvas ref={canvasRef} className="w-full h-full object-contain mix-blend-screen opacity-40" />
+      ) : (
+        <img src={`/sequence/frame_${totalFrames - 1}.webp`} className="w-full h-full object-contain mix-blend-screen opacity-40" alt="Resting frame" />
+      )}
     </div>
   );
 }

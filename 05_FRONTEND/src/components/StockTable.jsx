@@ -7,7 +7,7 @@ export default function StockTable({ inventory = [] }) {
     <div className="w-full overflow-x-auto">
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b border-white/10 text-white/40 text-xs uppercase tracking-widest">
+          <tr className="border-b border-neutral-200 text-neutral-400 text-xs uppercase tracking-widest">
             <th className="py-4 px-4 font-normal">SKU / Item</th>
             <th className="py-4 px-4 font-normal text-right">Current Stock</th>
             <th className="py-4 px-4 font-normal text-right">Status</th>
@@ -25,10 +25,10 @@ export default function StockTable({ inventory = [] }) {
                 className="border-b border-white/5 hover:bg-white/5 transition-colors group"
               >
                 <td className="py-4 px-4">
-                  <div className="text-white/90 font-medium">{item.name || item.sku}</div>
-                  <div className="text-white/40 text-xs font-mono mt-1">{item.sku} • {item.shelf_id || 'UNKNOWN'}</div>
+                  <div className="text-neutral-900 font-medium">{item.name || item.sku}</div>
+                  <div className="text-neutral-400 text-xs font-mono mt-1">{item.sku} • {item.shelf_id || 'UNKNOWN'}</div>
                 </td>
-                <td className="py-4 px-4 text-right text-lg font-light text-white/80">
+                <td className="py-4 px-4 text-right text-lg font-light text-neutral-800">
                   {item.estimated_quantity ?? item.stock}
                 </td>
                 <td className="py-4 px-4 text-right">
@@ -36,12 +36,12 @@ export default function StockTable({ inventory = [] }) {
                       ? 'bg-[#E11D48]/20 text-[#E11D48]'
                       : item.status === 'LOW' || item.status === 'low'
                         ? 'bg-yellow-500/20 text-yellow-500'
-                        : 'bg-white/10 text-white/60'
+                        : 'bg-neutral-200 text-neutral-500'
                     }`}>
                     {item.status}
                   </span>
                 </td>
-                <td className="py-4 px-4 text-right font-mono text-white/40 text-sm">
+                <td className="py-4 px-4 text-right font-mono text-neutral-400 text-sm">
                   {((item.confidence || 0) * 100).toFixed(0)}%
                 </td>
               </motion.tr>

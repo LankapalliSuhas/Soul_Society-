@@ -12,8 +12,8 @@
 // try/catch at the call site.
 // ============================================================================
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true" || import.meta.env.VITE_USE_MOCK === undefined;
+const BASE_URL = "";
+const USE_MOCK = false;
 
 async function request(path) {
   try {
@@ -69,21 +69,18 @@ function mockHealth() {
 // ---------------------------------------------------------------------------
 
 export async function getOccupancy() {
-  if (USE_MOCK) return { data: mockOccupancy(), error: null };
-  return request("/occupancy"); // TODO: confirm against api_contract.json
+  // Use mock for occupancy and health since there is no aggregated JSON sample for them
+  return { data: mockOccupancy(), error: null };
 }
 
 export async function getQueueLanes() {
-  if (USE_MOCK) return { data: mockQueue(), error: null };
-  return request("/queue"); // TODO: confirm against queue_schema.json
+  return request("/sample_data/sample_queue.json"); 
 }
 
 export async function getInventory() {
-  if (USE_MOCK) return { data: mockInventory(), error: null };
-  return request("/inventory"); // TODO: confirm against inventory_schema.json
+  return request("/sample_data/sample_inventory.json"); 
 }
 
 export async function getSystemHealth() {
-  if (USE_MOCK) return { data: mockHealth(), error: null };
-  return request("/system/health"); // TODO: confirm against backend_config.json
+  return { data: mockHealth(), error: null };
 }

@@ -26,14 +26,14 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col relative">
-        <header className="flex items-center justify-between px-8 py-6 z-50 border-b border-white/10 bg-[#050505]/80 backdrop-blur-md sticky top-0">
+        <header className="flex items-center justify-between px-8 py-6 z-50 border-b border-neutral-200 bg-[#FAFAFA]/80 backdrop-blur-md sticky top-0">
           <div className="flex items-center gap-6">
             <div className="text-xl font-medium tracking-widest uppercase">NETRA</div>
-            <nav className="flex gap-6 text-sm text-white/60 tracking-wider">
-              <Link to="/" className="hover:text-white transition-colors">Command</Link>
-              <Link to="/inventory" className="hover:text-white transition-colors">Inventory</Link>
-              <Link to="/queue" className="hover:text-white transition-colors">Queue</Link>
-              <Link to="/events" className="hover:text-white transition-colors">Live</Link>
+            <nav className="flex gap-6 text-sm text-neutral-500 tracking-wider">
+              <Link to="/" className="hover:text-neutral-900 transition-colors">Command</Link>
+              <Link to="/inventory" className="hover:text-neutral-900 transition-colors">Inventory</Link>
+              <Link to="/queue" className="hover:text-neutral-900 transition-colors">Queue</Link>
+              <Link to="/events" className="hover:text-neutral-900 transition-colors">Live</Link>
             </nav>
           </div>
           <SystemHealthBadge status={status} />

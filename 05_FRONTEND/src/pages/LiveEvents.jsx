@@ -12,11 +12,11 @@ export default function LiveEvents({ events }) {
       className="p-8 max-w-5xl mx-auto w-full flex flex-col h-[calc(100vh-100px)]"
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-light tracking-wide text-white/90 uppercase">Neural Sensor Log</h1>
-        <p className="text-white/60 mt-2">Real-time data stream from edge compute nodes.</p>
+        <h1 className="text-3xl font-light tracking-wide text-neutral-900 uppercase">Neural Sensor Log</h1>
+        <p className="text-neutral-500 mt-2">Real-time data stream from edge compute nodes.</p>
       </div>
 
-      <div className="flex-1 bg-[#111111]/40 border border-white/10 rounded-lg p-6 overflow-hidden flex flex-col">
+      <div className="flex-1 bg-[#111111]/40 border border-neutral-200 rounded-lg p-6 overflow-hidden flex flex-col">
         <EventTimeline events={events} />
       </div>
     </motion.div>

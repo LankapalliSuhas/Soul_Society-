@@ -15,15 +15,15 @@ export default function EventTimeline({ events = [] }) {
             transition={{ stiffness: 100, damping: 30 }}
             className="flex gap-4 items-start p-4 bg-[#111111]/40 border border-white/5 rounded-lg backdrop-blur-sm"
           >
-            <div className="text-white/40 font-mono text-xs w-20 shrink-0 mt-0.5">
+            <div className="text-neutral-400 font-mono text-xs w-20 shrink-0 mt-0.5">
               {new Date(ev.time || ev.timestamp).toLocaleTimeString([], { hour12: false })}
             </div>
             <div className="flex-1">
-              <div className={`text-xs uppercase tracking-widest font-medium mb-1 ${ev.type === 'ALERT' ? 'text-[#E11D48]' : 'text-white/80'
+              <div className={`text-xs uppercase tracking-widest font-medium mb-1 ${ev.type === 'ALERT' ? 'text-[#E11D48]' : 'text-neutral-800'
                 }`}>
                 {ev.type || ev.event_type}
               </div>
-              <div className="text-white/60 text-sm">
+              <div className="text-neutral-500 text-sm">
                 {ev.detail || (ev.payload ? JSON.stringify(ev.payload) : 'Raw event received')}
               </div>
             </div>
@@ -31,7 +31,7 @@ export default function EventTimeline({ events = [] }) {
         ))}
       </AnimatePresence>
       {events.length === 0 && (
-        <div className="text-white/40 text-sm py-8 text-center italic">
+        <div className="text-neutral-400 text-sm py-8 text-center italic">
           Awaiting sensor data...
         </div>
       )}

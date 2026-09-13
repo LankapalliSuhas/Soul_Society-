@@ -22,8 +22,8 @@ export default function Queue() {
       className="p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full"
     >
       <div>
-        <h1 className="text-3xl font-light tracking-wide text-white/90 uppercase">Calibrated Flow</h1>
-        <p className="text-white/60 mt-2">Engineered down to the wire. Automated load balancing across lanes.</p>
+        <h1 className="text-3xl font-light tracking-wide text-neutral-900 uppercase">Calibrated Flow</h1>
+        <p className="text-neutral-500 mt-2">Engineered down to the wire. Automated load balancing across lanes.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -32,8 +32,8 @@ export default function Queue() {
         ))}
       </div>
 
-      <div className="bg-[#111111]/40 border border-white/10 rounded-lg p-8 mt-4">
-        <h3 className="text-white/60 text-xs tracking-widest uppercase mb-8">ETA Distribution</h3>
+      <div className="bg-[#111111]/40 border border-neutral-200 rounded-lg p-8 mt-4">
+        <h3 className="text-neutral-500 text-xs tracking-widest uppercase mb-8">ETA Distribution</h3>
         <QueueETAChart data={lanes} />
       </div>
     </motion.div>
