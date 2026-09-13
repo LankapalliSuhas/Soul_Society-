@@ -1,24 +1,13 @@
 {
+  "registry_version": "1.0",
   "device_id": "esp32_sensor_node",
-  "type": "ESP32-WROOM",
-  "camera": null,
-  "quantity": 1,
-  "role": "shelf_sensor",
-  "mqtt_topic": "netra/events/weight",
+  "device_type": "ESP32-WROOM",
+  "device_role": "shelf_sensor",
   "location": "shelf_A",
-  "calibration_ref": "calibration/shelf_A",
-  "local_components": [
-    {
-      "component_id": "hx711_shelf",
-      "type": "HX711",
-      "quantity": 2,
-      "role": "shelf_weight"
-    },
-    {
-      "component_id": "load_cell_shelf",
-      "type": "load_cell",
-      "quantity": 2,
-      "role": "shelf_weight"
-    }
-  ]
+  "mqtt_topic": "netra/events/weight",
+  "timestamp": "2026-09-13T06:30:00Z",
+  "status": "active",
+  "hx711_id": "hx711_shelf",
+  "load_cell_id": "load_cell_shelf",
+  "calibration_ref": "calibration/shelf_A"
 }

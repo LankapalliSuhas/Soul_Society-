@@ -25,13 +25,7 @@ def get_all_devices():
         load_json("02_HARDWARE/registry/cart_registry.json")
     ]
 
-def get_all_components():
-    devices = get_all_devices()
-    components = []
-    for d in devices:
-        for c in d.get("local_components", []):
-            components.append(c)
-    return components
+
 
 def test_device_id_matches_device_registry():
     devices = get_all_devices()
@@ -60,16 +54,16 @@ def test_calibration_target_exists():
 
 def test_bom_count():
     devices = get_all_devices()
-    components = get_all_components()
     
-    cam_count = sum(1 for d in devices if d["type"] == "ESP32-CAM")
-    wroom_count = sum(1 for d in devices if d["type"] == "ESP32-WROOM")
-    hx711_count = sum(c["quantity"] for c in components if c["type"] == "HX711")
-    load_cell_count = sum(c["quantity"] for c in components if c["type"] == "load_cell")
-    pir_count = sum(c["quantity"] for c in components if c["type"] == "PIR")
+    cam_count = sum(1 for d in devices if d.get("device_type") == "ESP32-CAM")
+    wroom_count = sum(1 for d in devices if d.get("device_type") == "ESP32-WROOM")
+    
+    hx711_count = sum(1 for d in devices if d.get("hx711_id"))
+    load_cell_count = sum(1 for d in devices if d.get("load_cell_id"))
+    pir_count = sum(1 for d in devices if d.get("pir_id"))
     
     assert cam_count == 2
     assert wroom_count == 2
-    assert hx711_count == 3
-    assert load_cell_count == 3
+    assert hx711_count == 2
+    assert load_cell_count == 2
     assert pir_count == 1

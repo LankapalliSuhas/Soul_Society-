@@ -1,30 +1,17 @@
 {
+  "registry_version": "1.0",
   "device_id": "cart_node",
-  "type": "ESP32-WROOM",
-  "camera": null,
-  "quantity": 1,
-  "role": "cart_sensor",
+  "device_type": "ESP32-WROOM",
+  "device_role": "cart_sensor",
+  "location": "cart_01",
   "mqtt_topic": "netra/cart",
-  "location": "shopping_cart_01",
-  "calibration_ref": "calibration/cart_01",
-  "local_components": [
-    {
-      "component_id": "hx711_cart",
-      "type": "HX711",
-      "quantity": 1,
-      "role": "cart_weight"
-    },
-    {
-      "component_id": "load_cell_cart",
-      "type": "load_cell",
-      "quantity": 1,
-      "role": "cart_weight"
-    },
-    {
-      "component_id": "pir_cart",
-      "type": "PIR",
-      "quantity": 1,
-      "role": "cart_motion"
-    }
-  ]
+  "timestamp": "2026-09-13T06:30:00Z",
+  "weight": 1240.5,
+  "unit": "grams",
+  "item_count": 3,
+  "status": "active",
+  "hx711_id": "hx711_cart",
+  "load_cell_id": "load_cell_cart",
+  "pir_id": "pir_cart",
+  "calibration_ref": "calibration/cart_01"
 }
