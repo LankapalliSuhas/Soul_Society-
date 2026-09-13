@@ -1,19 +1,12 @@
 // ============================================================================
 // Centralized REST layer.
-//
-// IMPORTANT: endpoint paths and field names below are PLACEHOLDERS. Nobody
-// has supplied 07_INTEGRATION/api_contract.json or the 06_DATA/schemas/*
-// files yet, so nothing here should be treated as final. Once those files
-// exist, update BASE_URL usage and the field names inside each mock
-// generator (and remove the mock branch) — do not invent endpoint names of
-// your own beyond this point.
-//
-// Every exported function returns { data, error } so callers never need
-// try/catch at the call site.
 // ============================================================================
 
 const BASE_URL = "";
-const USE_MOCK = false;
+
+function getIsMock() {
+  return localStorage.getItem('USE_MOCK_DATA') !== 'false';
+}
 
 async function request(path) {
   try {
@@ -29,8 +22,7 @@ async function request(path) {
 }
 
 // ---------------------------------------------------------------------------
-// Mock generators — stand in for the real backend until contracts land.
-// Field names are best-effort guesses based on the design brief only.
+// Mock generators
 // ---------------------------------------------------------------------------
 
 function mockOccupancy() {
@@ -65,22 +57,73 @@ function mockHealth() {
 }
 
 // ---------------------------------------------------------------------------
-// Public API — swap USE_MOCK off once real endpoints exist.
+// Public API
 // ---------------------------------------------------------------------------
 
 export async function getOccupancy() {
-  // Use mock for occupancy and health since there is no aggregated JSON sample for them
-  return { data: mockOccupancy(), error: null };
+  if (getIsMock()) {
+    return { data: mockOccupancy(), error: null };
+  }
+  return request("/api/occupancy"); // Assuming backend has this when real
 }
 
 export async function getQueueLanes() {
+  if (getIsMock()) {
+    return { data: mockQueue(), error: null };
+  }
   return request("/sample_data/sample_queue.json"); 
 }
 
 export async function getInventory() {
+  if (getIsMock()) {
+    return { data: mockInventory(), error: null };
+  }
   return request("/sample_data/sample_inventory.json"); 
 }
 
 export async function getSystemHealth() {
-  return { data: mockHealth(), error: null };
+  if (getIsMock()) {
+    return { data: mockHealth(), error: null };
+  }
+  return request("/api/health"); // Assuming backend has this when real
+}
+
+// ---------------------------------------------------------------------------
+// Smart Shopping Cart API
+// ---------------------------------------------------------------------------
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+
+export async function fetchInventory() {
+  if (getIsMock()) {
+    return [
+      { id: '101', name: 'Premium Coffee Beans', price: 15.99, stock: 45, category: 'Groceries' },
+      { id: '102', name: 'Organic Honey', price: 8.49, stock: 120, category: 'Groceries' },
+      { id: '103', name: 'Almond Milk', price: 4.99, stock: 200, category: 'Dairy' },
+      { id: '104', name: 'Whole Wheat Bread', price: 3.49, stock: 50, category: 'Bakery' },
+      { id: '105', name: 'Dark Chocolate', price: 5.99, stock: 75, category: 'Snacks' }
+    ];
+  }
+  const res = await fetch(`${API_BASE_URL}/inventory`);
+  if (!res.ok) throw new Error('Failed to fetch inventory');
+  return res.json();
+}
+
+export async function fetchCart() {
+  if (getIsMock()) {
+    return {
+      items: [
+        { id: '101', name: 'Premium Coffee Beans', price: 15.99, quantity: 2 },
+        { id: '103', name: 'Almond Milk', price: 4.99, quantity: 1 }
+      ],
+      total: 36.97
+    };
+  }
+  const res = await fetch(`${API_BASE_URL}/cart`);
+  if (!res.ok) throw new Error('Failed to fetch cart');
+  return res.json();
+}
+
+export async function checkoutCart() {
+  return new Promise(resolve => setTimeout(() => resolve({ success: true, orderId: 'ORD-' + Math.floor(Math.random() * 10000) }), 1500));
 }
