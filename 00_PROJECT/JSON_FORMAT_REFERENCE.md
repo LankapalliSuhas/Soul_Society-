@@ -99,126 +99,233 @@ The owner responsible for the most JSON files is **Unknown**.
 }
 ```
 
-## 02_HARDWARE/hardware_registry.json
+## 02_HARDWARE/registry/devices.json
 **Owner:** Mighty (P5)
 **Read by:** Soham, Phantom, Akash, Team+1
-**Purpose:** Configuration file
+**Purpose:** Registry of physical devices with MQTT topics
 
 ### LOCKED SCHEMA — DO NOT MODIFY WITHOUT TEAM SIGN-OFF
 **Schema:**
 | Field (dot-path) | Type | Required | Allowed values / enum | Notes |
 |---|---|---|---|---|
-| `registry_version` | str | Yes | - | Value: 1.0 |
-| `last_updated` | str | Yes | - | ISO 8601 timestamp |
-| `devices` | array | Yes | - | Array of objects |
-| `devices[].device_id` | str | Yes | - | Matches device_registry.json exactly |
-| `devices[].type` | str | Yes | ESP32-CAM, ESP32-WROOM | - |
-| `devices[].camera` | str | Yes | OV2640, null | - |
-| `devices[].quantity` | int | Yes | - | - |
-| `devices[].role` | str | Yes | entry_exit, queue_detection, shelf_sensor, cart_sensor | Maps to sensor_fusion weights |
-| `devices[].mqtt_topic` | str | Yes | - | Must match integration_config.json exactly |
-| `devices[].location` | str | Yes | - | - |
-| `devices[].calibration_ref` | str | Yes | - | Relative path or null |
-| `components` | array | Yes | - | Array of objects |
-| `components[].component_id` | str | Yes | - | - |
-| `components[].type` | str | Yes | HX711, load_cell, PIR | - |
-| `components[].quantity` | int | Yes | - | - |
-| `components[].role` | str | Yes | shelf_weight, cart_weight, cart_motion, spare | Maps to sensor_fusion weights |
-| `availability_note` | str | Yes | - | Marks explicitly active hardware |
+| `[].device_id` | str | Yes | - | Matches device_registry.json exactly |
+| `[].type` | str | Yes | ESP32-CAM, ESP32-WROOM | - |
+| `[].camera` | str | Yes | OV2640, null | - |
+| `[].quantity` | int | Yes | - | - |
+| `[].role` | str | Yes | entry_exit, queue_detection, shelf_sensor, cart_sensor | Maps to sensor_fusion weights |
+| `[].mqtt_topic` | str | Yes | - | Must match integration_config.json exactly |
+| `[].location` | str | Yes | - | - |
 
 **Actual current content:**
 ```json
-{
-  "registry_version": "1.0",
-  "last_updated": "2026-09-12T22:50:25Z",
-  "devices": [
-    {
-      "device_id": "esp32_cam_entry",
-      "type": "ESP32-CAM",
-      "camera": "OV2640",
-      "quantity": 1,
-      "role": "entry_exit",
-      "mqtt_topic": "netra/entry",
-      "location": "store_entrance",
-      "calibration_ref": null
-    },
-    {
-      "device_id": "esp32_cam_queue",
-      "type": "ESP32-CAM",
-      "camera": "OV2640",
-      "quantity": 1,
-      "role": "queue_detection",
-      "mqtt_topic": "netra/queue",
-      "location": "checkout_zone",
-      "calibration_ref": null
-    },
-    {
-      "device_id": "esp32_sensor_node",
-      "type": "ESP32-WROOM",
-      "camera": null,
-      "quantity": 1,
-      "role": "shelf_sensor",
-      "mqtt_topic": "netra/events/weight",
-      "location": "shelf_A",
-      "calibration_ref": "calibration/shelf_A"
-    },
-    {
-      "device_id": "cart_node",
-      "type": "ESP32-WROOM",
-      "camera": null,
-      "quantity": 1,
-      "role": "cart_sensor",
-      "mqtt_topic": "netra/cart",
-      "location": "shopping_cart_01",
-      "calibration_ref": "calibration/cart_01"
-    }
-  ],
-  "components": [
-    {
-      "component_id": "hx711_shelf_01",
-      "type": "HX711",
-      "quantity": 1,
-      "role": "shelf_weight"
-    },
-    {
-      "component_id": "hx711_cart_01",
-      "type": "HX711",
-      "quantity": 1,
-      "role": "cart_weight"
-    },
-    {
-      "component_id": "hx711_spare_01",
-      "type": "HX711",
-      "quantity": 1,
-      "role": "spare"
-    },
-    {
-      "component_id": "load_cell_shelf_01",
-      "type": "load_cell",
-      "quantity": 1,
-      "role": "shelf_weight"
-    },
-    {
-      "component_id": "load_cell_cart_01",
-      "type": "load_cell",
-      "quantity": 1,
-      "role": "cart_weight"
-    },
-    {
-      "component_id": "load_cell_spare_01",
-      "type": "load_cell",
-      "quantity": 1,
-      "role": "spare"
-    },
-    {
-      "component_id": "pir_cart_01",
-      "type": "PIR",
-      "quantity": 1,
-      "role": "cart_motion"
-    }
-  ],
-  "availability_note": "Only hardware explicitly present in the team's actual BOM is marked active"
-}
+[
+  {
+    "device_id": "esp32_cam_entry",
+    "type": "ESP32-CAM",
+    "camera": "OV2640",
+    "quantity": 1,
+    "role": "entry_exit",
+    "mqtt_topic": "netra/entry",
+    "location": "store_entrance"
+  },
+  {
+    "device_id": "esp32_cam_queue",
+    "type": "ESP32-CAM",
+    "camera": "OV2640",
+    "quantity": 1,
+    "role": "queue_detection",
+    "mqtt_topic": "netra/queue",
+    "location": "checkout_zone"
+  },
+  {
+    "device_id": "esp32_sensor_node",
+    "type": "ESP32-WROOM",
+    "camera": null,
+    "quantity": 1,
+    "role": "shelf_sensor",
+    "mqtt_topic": "netra/events/weight",
+    "location": "shelf_A"
+  },
+  {
+    "device_id": "cart_node",
+    "type": "ESP32-WROOM",
+    "camera": null,
+    "quantity": 1,
+    "role": "cart_sensor",
+    "mqtt_topic": "netra/cart",
+    "location": "shopping_cart_01"
+  }
+]
+```
+
+## 02_HARDWARE/registry/components.json
+**Owner:** Mighty (P5)
+**Read by:** Soham, Phantom, Akash, Team+1
+**Purpose:** Registry of sub-components read locally by a parent device
+
+### LOCKED SCHEMA — DO NOT MODIFY WITHOUT TEAM SIGN-OFF
+**Schema:**
+| Field (dot-path) | Type | Required | Allowed values / enum | Notes |
+|---|---|---|---|---|
+| `[].component_id` | str | Yes | - | - |
+| `[].type` | str | Yes | HX711, load_cell, PIR | - |
+| `[].quantity` | int | Yes | - | - |
+| `[].role` | str | Yes | shelf_weight, cart_weight, cart_motion, spare | Maps to sensor_fusion weights |
+| `[].parent_device_id` | str | Yes | - | Target device_id or null |
+
+**Actual current content:**
+```json
+[
+  {
+    "component_id": "hx711_shelf_01",
+    "type": "HX711",
+    "quantity": 1,
+    "role": "shelf_weight",
+    "parent_device_id": "esp32_sensor_node"
+  },
+  {
+    "component_id": "hx711_cart_01",
+    "type": "HX711",
+    "quantity": 1,
+    "role": "cart_weight",
+    "parent_device_id": "cart_node"
+  },
+  {
+    "component_id": "hx711_spare_01",
+    "type": "HX711",
+    "quantity": 1,
+    "role": "spare",
+    "parent_device_id": null
+  },
+  {
+    "component_id": "load_cell_shelf_01",
+    "type": "load_cell",
+    "quantity": 1,
+    "role": "shelf_weight",
+    "parent_device_id": "esp32_sensor_node"
+  },
+  {
+    "component_id": "load_cell_cart_01",
+    "type": "load_cell",
+    "quantity": 1,
+    "role": "cart_weight",
+    "parent_device_id": "cart_node"
+  },
+  {
+    "component_id": "load_cell_spare_01",
+    "type": "load_cell",
+    "quantity": 1,
+    "role": "spare",
+    "parent_device_id": null
+  },
+  {
+    "component_id": "pir_cart_01",
+    "type": "PIR",
+    "quantity": 1,
+    "role": "cart_motion",
+    "parent_device_id": "cart_node"
+  }
+]
+```
+
+## 02_HARDWARE/registry/calibration_index.json
+**Owner:** Mighty (P5)
+**Read by:** Soham, Phantom, Akash, Team+1
+**Purpose:** Maps devices and components to their calibration files
+
+### LOCKED SCHEMA — DO NOT MODIFY WITHOUT TEAM SIGN-OFF
+**Schema:**
+| Field (dot-path) | Type | Required | Allowed values / enum | Notes |
+|---|---|---|---|---|
+| `[].target_id` | str | Yes | - | Device or component ID |
+| `[].calibration_path` | str | Yes | - | Relative path to calibration file |
+| `[].last_calibrated` | str | No | - | ISO 8601 timestamp or null |
+| `[].status` | str | Yes | uncalibrated, calibrated, stale | - |
+
+**Actual current content:**
+```json
+[
+  {
+    "target_id": "esp32_sensor_node",
+    "calibration_path": "calibration/shelf_A",
+    "last_calibrated": null,
+    "status": "uncalibrated"
+  },
+  {
+    "target_id": "cart_node",
+    "calibration_path": "calibration/cart_01",
+    "last_calibrated": null,
+    "status": "uncalibrated"
+  }
+]
+```
+
+## 02_HARDWARE/registry/bom_summary.json
+**Owner:** Team+1 (P6)
+**Read by:** Mighty, Team+1
+**Purpose:** Procurement view for Team+1
+
+### LOCKED SCHEMA — DO NOT MODIFY WITHOUT TEAM SIGN-OFF
+**Schema:**
+| Field (dot-path) | Type | Required | Allowed values / enum | Notes |
+|---|---|---|---|---|
+| `[].component_id` | str | Yes | - | Device or component type ID |
+| `[].name` | str | Yes | - | Human readable name |
+| `[].quantity_required` | int | Yes | - | - |
+| `[].quantity_available` | int | Yes | - | - |
+| `[].unit_cost` | float | Yes | - | - |
+| `[].total_cost` | float | Yes | - | - |
+| `[].procurement_status` | str | Yes | fulfilled, pending, backordered | - |
+
+**Actual current content:**
+```json
+[
+  {
+    "component_id": "esp32_cam",
+    "name": "ESP32-CAM with OV2640",
+    "quantity_required": 2,
+    "quantity_available": 2,
+    "unit_cost": 5.0,
+    "total_cost": 10.0,
+    "procurement_status": "fulfilled"
+  },
+  {
+    "component_id": "esp32_wroom",
+    "name": "ESP32-WROOM Development Board",
+    "quantity_required": 2,
+    "quantity_available": 2,
+    "unit_cost": 6.0,
+    "total_cost": 12.0,
+    "procurement_status": "fulfilled"
+  },
+  {
+    "component_id": "hx711",
+    "name": "HX711 Amplifier",
+    "quantity_required": 3,
+    "quantity_available": 3,
+    "unit_cost": 1.0,
+    "total_cost": 3.0,
+    "procurement_status": "fulfilled"
+  },
+  {
+    "component_id": "load_cell",
+    "name": "Load Cell (10kg)",
+    "quantity_required": 3,
+    "quantity_available": 3,
+    "unit_cost": 3.0,
+    "total_cost": 9.0,
+    "procurement_status": "fulfilled"
+  },
+  {
+    "component_id": "pir",
+    "name": "PIR Motion Sensor",
+    "quantity_required": 1,
+    "quantity_available": 1,
+    "unit_cost": 2.0,
+    "total_cost": 2.0,
+    "procurement_status": "fulfilled"
+  }
+]
 ```
 
 ## 03_AI/AI_CONFIG.json
@@ -1410,24 +1517,6 @@ The owner responsible for the most JSON files is **Unknown**.
 }
 ```
 
-## .\02_HARDWARE\hardware_registry.json
-**Owner:** Unknown
-**Read by:** .
-**Purpose:** Configuration file
-
-**FILE MISSING / EMPTY — not yet populated**
-*(Schema below inferred from purpose/contract where possible, otherwise blank)*
-
-**Schema:**
-| Field (dot-path) | Type | Required | Allowed values / enum | Notes |
-|---|---|---|---|---|
-| N/A | N/A | N/A | N/A | No structure available |
-
-**Actual current content:**
-```json
-// EMPTY FILE
-```
-
 ## .\03_AI\AI_CONFIG.json
 **Owner:** Unknown
 **Read by:** 04_BACKEND, ., 03_AI, 08_TESTING
@@ -2526,7 +2615,10 @@ The owner responsible for the most JSON files is **Unknown**.
 |---|---|---|
 | `00_PROJECT/project_config.json` | Mighty (P5) | . |
 | `01_ARCHITECTURE/architecture_config.json` | Phantom (P1) | . |
-| `02_HARDWARE/hardware_registry.json` | Akash (P3) | . |
+| `02_HARDWARE/registry/devices.json` | Mighty (P5) | Soham, Phantom, Akash, Team+1 |
+| `02_HARDWARE/registry/components.json` | Mighty (P5) | Soham, Phantom, Akash, Team+1 |
+| `02_HARDWARE/registry/calibration_index.json` | Mighty (P5) | Soham, Phantom, Akash, Team+1 |
+| `02_HARDWARE/registry/bom_summary.json` | Team+1 (P6) | Mighty, Team+1 |
 | `03_AI/AI_CONFIG.json` | Phantom (P1) | 04_BACKEND, ., 03_AI, 08_TESTING |
 | `03_AI/MODEL_REGISTRY.json` | Phantom (P1) | . |
 | `04_BACKEND/backend_config.json` | Soham (P2) | 04_BACKEND, . |
@@ -2547,7 +2639,7 @@ The owner responsible for the most JSON files is **Unknown**.
 | `10_DEMO/demo_config.json` | Mighty (P5) | . |
 | `.\00_PROJECT\project_config.json` | Unknown | . |
 | `.\01_ARCHITECTURE\architecture_config.json` | Unknown | . |
-| `.\02_HARDWARE\hardware_registry.json` | Unknown | . |
+
 | `.\03_AI\AI_CONFIG.json` | Unknown | 04_BACKEND, ., 03_AI, 08_TESTING |
 | `.\03_AI\MODEL_REGISTRY.json` | Unknown | . |
 | `.\04_BACKEND\backend_config.json` | Unknown | 04_BACKEND, . |
