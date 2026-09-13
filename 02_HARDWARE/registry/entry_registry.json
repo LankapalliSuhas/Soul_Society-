@@ -1,0 +1,11 @@
+{
+  "device_id": "esp32_cam_entry",
+  "type": "ESP32-CAM",
+  "camera": "OV2640",
+  "quantity": 1,
+  "role": "entry_exit",
+  "mqtt_topic": "netra/entry",
+  "location": "store_entrance",
+  "calibration_ref": null,
+  "local_components": []
+}

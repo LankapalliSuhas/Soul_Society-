@@ -9,7 +9,7 @@ for root, dirs, files in os.walk('.'):
         continue
     for file in files:
         if file.endswith('.json'):
-            path = os.path.join(root, file).replace('\\\\', '/')
+            path = os.path.join(root, file).replace('\\', '/')
             if path.startswith('./'):
                 path = path[2:]
             all_json.append(path)
@@ -18,7 +18,10 @@ for root, dirs, files in os.walk('.'):
 requested = [
     '00_PROJECT/project_config.json',
     '01_ARCHITECTURE/architecture_config.json',
-    '02_HARDWARE/hardware_registry.json',
+    '02_HARDWARE/registry/entry_registry.json',
+    '02_HARDWARE/registry/queue_registry.json',
+    '02_HARDWARE/registry/shelf_registry.json',
+    '02_HARDWARE/registry/cart_registry.json',
     '03_AI/AI_CONFIG.json',
     '03_AI/MODEL_REGISTRY.json',
     '04_BACKEND/backend_config.json',
@@ -54,7 +57,7 @@ all_json.sort(key=sort_key)
 ownership = {
     '00_PROJECT': 'Mighty (P5)',
     '01_ARCHITECTURE': 'Phantom (P1)',
-    '02_HARDWARE': 'Akash (P3)',
+    '02_HARDWARE': 'Mighty (P5)',
     '03_AI': 'Phantom (P1)',
     '04_BACKEND': 'Soham (P2)',
     '05_FRONTEND': 'Cherry (P4)',

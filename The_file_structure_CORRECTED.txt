@@ -1,0 +1,7 @@
+02_HARDWARE/registry/
+  entry_registry.json
+  queue_registry.json
+  shelf_registry.json
+  cart_registry.json
+
+(Replaced the single 02_HARDWARE/hardware_registry.json)

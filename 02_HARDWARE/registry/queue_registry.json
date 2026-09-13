@@ -1,0 +1,11 @@
+{
+  "device_id": "esp32_cam_queue",
+  "type": "ESP32-CAM",
+  "camera": "OV2640",
+  "quantity": 1,
+  "role": "queue_detection",
+  "mqtt_topic": "netra/queue",
+  "location": "checkout_zone",
+  "calibration_ref": null,
+  "local_components": []
+}
